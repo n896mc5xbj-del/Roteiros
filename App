@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roteiros Premium</title>
+
+<style>
+:root{
+--bg:#0f172a;
+--card:#111827;
+--primary:#f97316;
+--text:#f8fafc;
+--muted:#94a3b8;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:var(--bg);color:var(--text)}
+.navbar{padding:15px;border-bottom:1px solid #1f2937}
+.grid{padding:15px;display:grid;gap:10px}
+.card{background:var(--card);padding:15px;border-radius:10px;cursor:pointer}
+.card:hover{border:1px solid var(--primary)}
+.modal{
+position:fixed;inset:0;background:rgba(0,0,0,.8);
+display:none;align-items:center;justify-content:center;
+}
+.modal-content{
+background:var(--card);padding:20px;border-radius:10px;width:90%;
+}
+button{
+background:var(--primary);border:none;padding:10px;color:white;margin-top:10px;border-radius:5px
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+<h2>📱 Roteiros Premium</h2>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="modal" id="modal">
+<div class="modal-content">
+<h3 id="title"></h3>
+<p id="text"></p>
+<button onclick="closeModal()">Fechar</button>
+</div>
+</div>
+
+<script>
+const scripts=[
+{title:"Pare de usar o celular cedo",text:"Evite celular na primeira hora do dia"},
+{title:"Regra dos 2 minutos",text:"Comece tarefas pequenas"},
+{title:"Dormir melhor",text:"Evite tela antes de dormir"}
+];
+
+const grid=document.getElementById("grid");
+
+scripts.forEach(s=>{
+const div=document.createElement("div");
+div.className="card";
+div.innerHTML=`<h3>${s.title}</h3>`;
+div.onclick=()=>openModal(s);
+grid.appendChild(div);
+});
+
+function openModal(s){
+document.getElementById("title").innerText=s.title;
+document.getElementById("text").innerText=s.text;
+document.getElementById("modal").style.display="flex";
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+</script>
+
+</body>
+</html>
